@@ -3,7 +3,7 @@ services:
     app:
         build:
             context: .
-            dockerfile: docker/app.docker
+            dockerfile: builds/app.docker
         links:
          - mongo:mongo
          - redis:redis
@@ -11,7 +11,7 @@ services:
     nginx:
         build:
             context: .
-            dockerfile: docker/nginx.docker
+            dockerfile: builds/nginx.docker
         links:
          - app:app
         ports:
