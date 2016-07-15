@@ -1,0 +1,86 @@
+publish documents or logic
+    all done, link to any similar documents or logic?
+        <!-- document -->
+
+
+<form name="document" ng-controller="creatorctrl" novalidate>
+    <div>{{ document is document.$valid }}</div>
+    <div ng-submit="document.$valid && creatorCtrl.submit()"></div>
+</form>
+
+        <div id="compose" ng-hide><!-- pull from partials/create--></div>
+        <div id="settings" ng-hide><!-- pull from partials/myself--></div>
+        <div ng-controller="PhoneListController">
+            <ul>
+                <li ng-repeat="phone in phones">
+                    <span>{{phone.name}}</span>
+                    <p>{{phone.snippet}}</p>
+                </li>
+            </ul>
+            <p>{{"hello" + " you"}}</p>
+            <section ng-controller="Panels as panel">
+                <ul class="nav nav-pills">
+                    <li ng-class="{ active:panel.isSelected(1) }">
+                        <a href ng-click="panel.selectTab(1)">Description</a>
+                    </li>
+                    <li ng-class="{ active:panel.isSelected(2) }">
+                        <a href ng-click="panel.selectTab(2)">Specifications</a>
+                    </li>
+                    <li ng-class="{ active:panel.isSelected(3) }">
+                        <a href ng-click="panel.selectTab(3)">Reviews</a></li>
+                </ul>
+                {{tab}}
+                <div class="panel" ng-show="panel.isSelected(1)">
+                    <h4>Description</h4>
+                    <p>{{product.description}}</p>
+                </div>
+                <div class="panel" ng-show="panel.isSelected(2)">
+                    <h4>Specifications</h4>
+                    <p>None</p>
+                </div>
+                <div class="panel" ng-show="panel.isSelected(3)">
+                    <form name="reviewForm" ng-controller="review as r" ng-submit="reviewCtrl.addReview(product)" novalidate>
+                        <h4>Reviews</h4>
+                        <h1>{{panel.email}}</h1>
+                        <blockquote>
+                            {{panel.text}}
+                        </blockquote>
+                        <input class="form-control" ng-model="panel.email" type="email">
+                        <textarea ng-model="panel.text">
+
+                        </textarea>
+                        <p>None</p>
+                        <div> reviewForm is {{reviewForm.$valid}}</div>
+                    </form>
+                </div>
+            </section>
+            <div ng-controller="internalServe as serve">
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="product in serve.products">
+                        <h1> {{product.name}} </h1>
+                        <h2 class="pull-right"> {{product.price | currency }} </h2>
+                        <p> {{product.description}} </p>
+                        <button ng-show="product.canPurchase"> Add to Cart </button>
+                    </li>
+                </ul>
+            </div>
+    <div class="panel hero-cover">
+      <div class="panel-content">
+        <div class="registration">
+          <h2>Register</h2>
+          <form class="form" method='POST' action='/registration'>
+            <input class="form-input" type="hidden", name="_csrf", value='<%-csrfToken%>'>
+            <input class="form-input" type='text' name='name' placeholder='Name'>
+            <input class="form-input" type='text' name='username' placeholder='User Name'>
+            <input class="form-input" type='password' name='password' placeholder='Password'>
+            <input class="form-input" type='password' name='password_confirm' placeholder='Confirm Password'>
+            <input class="btn" type='submit' value='Submit'>
+            <a href='/sign_in'>Sign in</a>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--https://github.com/vpegado/angular-markdown-filter-->
+
+<div ng-submit="creatorctrl.submit()"></div>

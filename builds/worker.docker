@@ -1,0 +1,13 @@
+FROM python:2.7
+MAINTAINER Cameron Whiting "thetoxicarcade@gmail.com"
+RUN mkdir /code
+WORKDIR /code
+RUN apt-get update -qq
+RUN apt-get install -qqy build-essential libssl-dev libffi-dev python-dev
+RUN bash -c "pip install flask redis pymongo nose2 PGPy pyjwt celery"
+ADD server.py /code/server.py
+ADD structs /code/structs
+# http://flask.pocoo.org/docs/0.11/testing/
+# add in unit testing of flask content
+RUN python -c "from server import *"
+RUN nose2 --verbose

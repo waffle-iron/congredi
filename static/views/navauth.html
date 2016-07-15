@@ -1,0 +1,14 @@
+<form class="navbar-form navbar-right navbar-collapse collapse" ng-controller="nav as user">
+	<div ng-show="user.session.active">
+		<div class="pull-left">
+			<p>Welcome {{ user.name }}</p>
+		</div>
+		<a ng-click="user.ask('logoff')" class="btn btn-info">Log Off</a>
+		<a ng-click="user.ask('delete')" class="btn btn-danger">Delete Account</a>
+	</div>
+	<div ng-hide="user.session.active">
+		<p cass="pull-left">Please Authenticate</p>
+		<a ng-click="user.ask('register')" class="btn btn-info">Sign Up</a>
+		<a ng-click="user.ask('logon')" class="btn btn-sucess">Log In</a>
+	</div>
+</form>

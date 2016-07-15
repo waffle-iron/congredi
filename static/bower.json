@@ -1,0 +1,23 @@
+{
+  "name": "delegito",
+  "description": "crypto-ai-api",
+  "main": "",
+  "authors": [
+    "Cameron Whiting <thetoxicarcade@gmail.com>"
+  ],
+  "license": "GPL3",
+  "homepage": "delegito.io",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "FortAwesome/Font-Awesome#^4.6.3",
+    "foundation": "zurb/bower-foundation",
+    "openpgp": "^2.3.2"
+  }
+}

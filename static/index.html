@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<title>Delegito.io</title>
+	<meta name="description" content="">
+	<base href="/">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/bower_components/angular-bootstrap/ui-bootstrap-csp.css" />
+	<link rel="stylesheet" type="text/css" href="/static/bower_components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/bower_components/foundation/css/foundation.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/dist/css/app.min.css" />
+</head>
+<body class="wrapper" ng-app="app">
+	<nav class="navbar navbar-default">
+		<span class="navbar-brand glyphicon glyphicon-console"></span>
+		<ul class="nav navbar-nav navbar-collapse collapse">
+			<li class="active navbar-header">
+				<a href="/" class="navbar-brand">Delegito</a>
+			</li>
+		</ul>
+		<navauth></navauth>
+	</nav>
+	<div id="content" class="container wrapper" ng-view>
+		<div>
+			<h1>Loading...</h1>
+			<i class="fa fa-5x fa-spinner fa-spin" aria-hidden="true"></i>
+			<!--fa-spin fa-pulse : fa-spinner fa-refresh fa-cog-->
+		</div>
+	</div>
+	<footer class="footer">
+		<p class="muted right">&copy; Copyright 2016, GPL3 and above. <a href="//github.com/thetoxicarcade/delegito">Source code</a>.</p>
+	</footer>
+</body>
+<script src="/static/dist/js/app.min.js"></script>
+</html>

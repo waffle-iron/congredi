@@ -1,0 +1,68 @@
+<div class="overlay">
+	<div class="panel panel-default col-md-4 col-sm-4 col-md-offset-4 col-sm-offset-4" ng-controller="authBump">
+		<div class="panel-heading">
+			<h1 class="panel-title">Log On / Sign Up</h1>
+		</div>
+		<div class="panel-body lead">
+			<ul class="nav nav-tabs" id="init">
+				<li class="active">
+					<a ng-click="setTab(1)" data-toggle="tab",href="#register">Register</a>
+				</li>
+				<li>
+					<a ng-click="setTab(2)" data-toggle="tab", href="#signon">Sign On</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div id="register" class="tab-pane active" ng-show="isSet(1)">
+					<form role="form", action="/auth/db",method="post">
+						<div class="form-group">
+							<input class="form-control" type="text" name="username" placeholder="<cool handle">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" name="password" placeholder="<secret password>">
+						</div>
+						<button class="btn btn-default" type="submit">Register</button>
+						<button class="btn btn-primary right" type="button">Cancel</button>
+					</form>
+				</div>
+				<div id="signon" class="tab-pane" ng-show="isSet(2)">
+					<form role="form", action="/auth/session",method="post">
+						<div class="form-group">
+							<input class="form-control" type="text" name="username" placeholder="Enter Username">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" name="password" placeholder="Enter Password">
+						</div>
+						<button class="btn btn-default" type="submit">Sign On</button>
+						<button class="btn btn-primary right" type="button">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--
+
+
+
+<div ng-controller="ModalDemoCtrl">
+  <script type="text/ng-template" id="myModalContent.html">
+    <h3>I'm a modal!</h3>
+    <ul>
+      <li ng-repeat="item in items">
+        <a ng-click="selected.item = item">{{ item }}</a>
+      </li>
+    </ul>
+    <p>Selected: <b>{{ selected.item }}</b></p>
+    <button class="button secondary" ng-click="reposition()">Reset top position</button>
+    <button class="button" ng-click="ok()">OK</button>
+    <a class="close-reveal-modal" ng-click="cancel()">&#215;</a>
+  </script>
+
+  <button class="button" ng-click="open()">Open me!</button>
+  <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+</div>
+
+
+
+-->

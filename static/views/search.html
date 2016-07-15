@@ -1,0 +1,26 @@
+<div ng-controller="search" class="input-group col-md-8 col-sm-8">
+	<input class="form-control" name="terms" ng-model="sterm" id="search" placeholder="Search for Documents, Arguments, Logic, and Peers">
+	<div class="input-group-btn">
+		<button class="btn btn-info" ng-click="searchBar.ask(sterm)">
+			<span class="glyphicon glyphicon-search"></span> {{sterm}}
+		</button>
+	</div>
+</div>
+<!-- output (should be part of ng-controller=search-->
+<!--publish a position fork linked to this-->
+<!--edit what you voted on this-->
+<!--fork this further-->
+<ul ng-repeat="post in posts">
+	<li>{{post.title}}</li>
+</ul>
+<script>
+	module.exports = function($scope, $http) {
+			$http.get('data/posts.json').
+			success(function(data, status, headers, config) {
+				$scope.posts = data;
+			}).
+			error(function(data, status, headers, config) {
+				// log error
+			});
+	};
+</script>

@@ -1,0 +1,33 @@
+version: '2'
+services:
+    app:
+        build:
+            context: .
+            dockerfile: docker/app.docker
+        links:
+         - mongo:mongo
+         - redis:redis
+        command: python /code/server.py
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx.docker
+        links:
+         - app:app
+        ports:
+         - 80:80
+        volumes:
+         - /etc/ssl/certs/delegito.crt:/etc/ssl/certs/delegito.crt
+         - /etc/ssl/private/delegito.key:/etc/ssl/certs/delegito.key
+    mongo:
+        image: mongo
+        volumes:
+         - /data/info:/data/db
+        # ports:
+        #  - "27017:27017"
+    redis:
+        image: redis
+        volumes:
+         - /data/redis:/data
+        # ports:
+        #  - "6379:6379"

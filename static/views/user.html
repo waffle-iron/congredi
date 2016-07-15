@@ -1,0 +1,386 @@
+yourself:
+    my bio:
+        edit this
+    my vendors, who influence what I see:
+        re-rate these
+    my equations, which preselect my answers:
+        re-rate or edit these
+    my positions, or final decisions:
+        re-rate or edit these
+
+change handle, name, bio, image, location, url
+
+<h1>Users</h1>
+<div class="row">
+  <div ng-repeat="user in users" class="col-sm-6">
+    <h2><gravatar email="user.email"></gravatar><a ng-href="#/users/{{user.id}}">{{user.name}}</a></h2>
+    <p>{{user.site}}</p>
+  </div>
+</div>
+
+<h1>{{user.name}}</h1><br>
+<a ng-href="{{user.site}}">{{user.site}}</a>
+<p>{{user.bio}}</p>
+<div class="new-note">
+  <div class="new-note-container">
+    <h2>{{user.name}}</h2>
+    <i class="icon {{user.type}}"></i>
+
+    <ul class='errors' ng-if="errors">
+      <li ng-repeat="error in errors">{{error}}</li>
+    </ul>
+
+    <form class="form">
+      <fieldset class="form-field">
+        <label class="form-label" for="name">Name</label>
+        <input class="form-input" name="name" ng-model="user.name" />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="username">User Name</label>
+        <input class="form-input" name="username" ng-model="user.username" />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="password">Password</label>
+        <input class="form-input" name="password" ng-model="user.password" placeholder='password' />
+        <input class="form-input" name="passwordConfirm" ng-model="user.passwordConfirm" placeholder='password confirm' />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="twitter_handle">Twitter name</label>
+        <input class="form-input" name="twitter_handle" ng-model="user.twitter_handle" placeholder='Twitters' />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="site">Site</label>
+        <input class="form-input" name="site" ng-model="user.site" placeholder="I don't have a site :(" />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="bio">Bio</label>
+        <textarea class="form-input" name="bio"  ng-model="user.bio" placeholder="Tell us a little about yourself."></textarea>
+      </fieldset>
+
+      <button class="btn" ng-click="updateUser(user)" ng-disabled="updating">{{updating ? 'Saving...' : 'Save'}}</button>
+    </form>
+  </div>
+</div>
+<div class="users-wrapper">
+  <a class="card-users" ng-repeat="user in users | filter:search" ng-href="#/users/{{user.id}}">
+    <nw-card card-title="user.name" image='gravatarUrl(user)' body="user.bio" id="user.id" type="{{user.username}}"></nw-card>
+  </a>
+</div>
+<div class="card">
+  <img ng-src='{{gravatarUrl(user)}}'/>
+  <h1 class="user-name">{{user.name}}</h1>
+  <h3>Bio</h3>
+  <p>{{user.bio}}</p>
+
+  <h3>Notes</h3>
+  <div>
+    <a ng-repeat="note in user.notes | filter:filter | filter:search" ng-href='#/notes/{{note.id}}'>
+      <nw-card card-title="note.header" icon="note.icon" body="note.description" type="note.type" id="note.id"></nw-card>
+    </a>
+    <p ng-if='user.notes.length === 0'>This user Doesn't have any notes :(</p>
+  </div>
+</div>
+<div class="new-note">
+  <div class="new-note-container">
+    <ul class='errors' ng-if="errors">
+      <li ng-repeat="error in errors">{{error}}</li>
+    </ul>
+
+    <form class="form">
+      <fieldset class="form-field">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-input" name="title" ng-model="note.header" />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="category">Category</label>
+        <select name='category' ng-model='note.CategoryId' ng-options='category.id as category.name for category in categories'></select>
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="link">Link</label>
+        <input class="form-input" name="link" ng-model="note.link" />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="icon"><i class="icon {{note.icon}}"></i>Icon</label>
+        <input class="form-input" name="icon" ng-model="note.icon" />
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-input" name="description" ng-model="note.description" placeholder="A short description of this note"></textarea>
+      </fieldset>
+
+      <fieldset class="form-field">
+        <label class="form-label" for="content">Content</label>
+        <textarea class="form-input" name="Content"  ng-model="note.content" placeholder="The meat of your note"></textarea>
+      </fieldset>
+
+      <button class="btn" ng-click="updateNote(note)" ng-disabled="updating">{{updating ? 'Saving...' : 'Save'}}</button>
+    </form>
+  </div>
+</div>
+<div class="note-wrapper">
+  <div class="note-content">
+    <div class="notes-header">
+      <h1 title="Notes">Notes</h1>
+      <a class="btn-b" href='#/notes/new' ng-if='loggedIn'>
+        <i class="icon add"></i>
+        New Note
+      </a>
+    </div>
+    <div class="note-wrapper">
+      <p ng-show="note">Nothing here to show you, friend.</p>
+      <a class="card-notes" ng-repeat="note in notes | filter:current" ng-href="#/notes/{{note.id}}">
+
+        <nw-card header="note.title"
+                 icon="{{note.icon}}"
+                 body="note.description"
+                 id="note.id"
+                 type="{{note.noteType.name}}"></nw-card>
+      </a>
+    </div>
+  </div>
+
+  <nw-category-select active-category='current' notes='notes'></nw-category-select>
+
+</div>
+<div class="card">
+  <h1><i class="{{note.icon}} icon left"></i>{{note.header}}</h1>
+  <p>Created by: {{note.user.name || note.user.username}}</p>
+  <a ng-href='#/notes/{{note.id}}/edit' ng-if='currentUser.id === note.UserId'>Edit Note</a>
+  <h3>Description:</h3>
+  <p>{{note.description}}</p>
+
+  <h3>Contents:</h3>
+  <p>{{note.content}}</p>
+</div>
+<h1>Edit: {{note.title}}</h1>
+<form>
+  <fieldset class="form-group">
+    <label for="title">Title</label>
+    <input class="form-control" type="text" id="title" name="title" ng-model="note.title">
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="title">Category</label>
+    <select ng-options="category.id as category.name for category in categories" ng-model="note.categoryId"></select>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="title">User</label>
+    <select ng-options="user.id as user.name for user in users" ng-model="note.userId"></select>
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="description">Description</label>
+    <input class="form-control" type="text" id="description" name="description" ng-model="note.description">
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="content">Content</label>
+    <textarea class="form-control" type="text" id="content" name="content" ng-model="note.content"></textarea>
+  </fieldset>
+
+  <input type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}" class="btn btn-default" ng-click="saveNote(note)" ng-disabled="isSubmitting">
+</form>
+
+<div class="page-header">
+  <h1>{{note.title}}</h1><br>
+  <small>{{note.user.name}}</small>
+</div>
+<p>{{note.content}}</p>
+<p><span class="label label-info">{{note.category.name}}</span></p>
+<a ng-href="#/notes/{{note.id}}/edit" class="btn btn-default">Edit Note</a>
+<a href="" ng-click="deleteNote(note)" class="btn btn-danger">Delete</a>
+<h1>New Note</h1>
+<form>
+  <fieldset class="form-group">
+    <label for="title">Title</label>
+    <input class="form-control" type="text" id="title" name="title" ng-model="note.title">
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="description">Description</label>
+    <input class="form-control" type="text" id="description" name="description" ng-model="note.description">
+  </fieldset>
+
+  <fieldset class="form-group">
+    <label for="content">Content</label>
+    <textarea class="form-control" type="text" id="content" name="content" ng-model="note.content"></textarea>
+  </fieldset>
+
+  <input type="submit" value="{{isSubmitting ? 'saving...' : 'Save'}}" class="btn btn-default" ng-click="saveNote(note)" ng-disabled="isSubmitting">
+</form>
+<h1>Notes <a class="btn btn-default" href="#/notes/new">New Note</a></h1>
+<div class="form-group">
+  Search: <input type='text' ng-model="search.input.$">
+</div>
+<nw-category-selector ng-model="search.category"></nw-category-selector>
+
+<div class="row">
+  <div ng-repeat="note in notes | categoryFilter:search.category | filter:search.input" class="col-sm-6">
+    <h2><a title="{{note.user.name}}" ng-href="#/notes/{{note.id}}">{{note.title}}</a></h2>
+    <p>{{note.description}}</p>
+    <p><span class="label label-info">{{note.category.name}}</span></p>
+  </div>
+</div>
+<div>
+  <h4>Description</h4>
+  <blockquote>{{product.description}}</blockquote>
+</div>
+<section>
+  <!--  Tab Navigation  -->
+  <ul class="nav nav-pills">
+    <li ng-class="{ active:tab.isSet(1) }">
+      <a href="" ng-click="tab.setTab(1)">Description</a>
+    </li>
+    <li ng-class="{ active:tab.isSet(2) }">
+      <a href="" ng-click="tab.setTab(2)">Specs</a>
+    </li>
+    <li ng-class="{ active:tab.isSet(3) }">
+      <a href="" ng-click="tab.setTab(3)">Reviews</a>
+    </li>
+  </ul>
+  <!--  Description Tab's Content  -->
+  <descriptions ng-show="tab.isSet(1)"></descriptions>
+  <!--  Spec Tab's Content  -->
+  <specs ng-show="tab.isSet(2)"></specs>
+  <!--  Review Tab's Content  -->
+  <reviews ng-show="tab.isSet(3)">hi</reviews>
+</section>
+<div>
+  <!--  Product Reviews List -->
+  <ul>
+    <h4> Reviews </h4>
+    <li ng-repeat="review in product.reviews">
+
+      <blockquote>
+        <strong>{{review.stars}} Stars</strong>
+        {{review.body}}
+        <cite class="clearfix">—{{review.author}}  on {{review.createdOn | date}}</cite>
+      </blockquote>
+    </li>
+  </ul>
+
+  <!--  Review Form -->
+  <form name="reviewForm" role="form" ng-controller="ReviewController as reviews" ng-submit="reviews.addReview(product)">
+    <!--  Live Preview -->
+    <blockquote ng-show="reviews.review.stars">
+      <strong>{{reviews.review.stars}} Stars</strong>
+      {{reviews.review.body}}
+      <cite class="clearfix">—{{reviews.review.author}}</cite>
+    </blockquote>
+
+    <!--  Review Form -->
+    <h4>Submit a Review</h4>
+    <fieldset class="form-group">
+      <select ng-model="reviews.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars">
+        <option value="">Rate the Product</option>
+      </select>
+    </fieldset>
+    <fieldset class="form-group">
+      <textarea ng-model="reviews.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+    </fieldset>
+    <fieldset class="form-group">
+      <input ng-model="reviews.review.author" type="email" class="form-control" placeholder="jimmyDean@sausage.com" title="Email" />
+    </fieldset>
+    <fieldset class="form-group">
+      <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+    </fieldset>
+  </form>
+</div>
+<div>
+  <h4>Specs</h4>
+  <ul class="list-unstyled">
+    <li>
+      <strong>Shine</strong>
+      : {{product.shine}}</li>
+    <li>
+      <strong>Faces</strong>
+      : {{product.faces}}</li>
+    <li>
+      <strong>Rarity</strong>
+      : {{product.rarity}}</li>
+    <li>
+      <strong>Color</strong>
+      : {{product.color}}</li>
+  </ul>
+</div>
+<div class="card" title="{{header}}">
+
+  <img ng-src='{{image}}' ng-if='image'>
+
+  <div ng-if='icon'>
+    <i class="icon icon-card {{icon}}"></i>
+  </div>
+
+  <h2 class="h3">{{header}}</h2>
+
+  <p class="card-type">
+    {{type}}
+  </p>
+
+  <div class="card-hidden">
+    <a ng-href='#/notes/{{id}}' ng-bind-html="body"></a>
+  </div>
+</div>
+<a class="sort-menu-item"
+   ng-class="{'active': isActive()}"
+   ng-click="makeActive()">
+
+  <i class="icon left {{category.icon}}"></i>
+  {{category.name}}
+  ({{categoryCount()}})
+
+  <i class="icon close"
+     ng-if='isActive()'
+     ng-click="makeInactive($event)"></i>
+  </a>
+ <!-- Simple Version -->
+
+<!-- <a class="sort-menu-item" ng-class="{'active': categoryActive()}" ng-click="makeActive()">
+  <i class="icon left {{category.icon}}"></i> {{category.name}}
+</a> -->
+<div class="sort-menu">
+  <h2>Categories</h2>
+  <div class="card">
+    <nw-category-item ng-repeat="category in categories" category="category">
+    </nw-category-item>
+  </div>
+</div>
+<div class="nw-category-selector btn-group" role="group">
+  <a href=""
+     ng-repeat="category in categories"
+     class="btn btn-default"
+     ng-class="{'active': isActive(category)}"
+     ng-click="toggleCategory(category)">{{category.name}}</a>
+</div><ul class="nav navbar-nav">
+  <li ng-class="{'active': isPage('notes')}"><a href="#/notes">Notes</a></li>
+  <li ng-class="{'active': isPage('users')}"><a href="#/users">Users</a></li>
+</ul><a href="#/{{pageName}}" class="list-item" ng-class="{'active': selected() === pageName}">
+</a>
+<div class='session'>
+  <div class="dropdown" ng-if='session.id'>
+    <a class="dropdown-btn">{{session.username}} <i class="icon user"></i></a>
+    <ul class="dropdown-menu list">
+      <li class="dropdown-item">
+        <a href="#/profile/edit" class="dropdown-item-link list-item-link"><i class="edit icon"></i> Edit Profile</a>
+      </li>
+      <li class="dropdown-item">
+        <a href="/sign_out" class="dropdown-item-link list-item-link"><i class="settings icon"></i> Sign Out</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="session-create" ng-if='!session.id'>
+    <a href='/sign_in'>Sign In</a> |
+    <a href='/sign_up'>Register</a>
+  </div>
+</div>

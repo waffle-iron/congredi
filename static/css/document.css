@@ -1,0 +1,17 @@
+/*call reset or let bootstrap reset it*/
+.ng-dirty.ng-valid {
+    border-color: #78FA89;
+}
+.ng-dirty.ng-invalid {
+    border-color: #FA787E;
+}
+.important { color: #336699; }
+/*@charset "UTF-8"; */
+/* grab normalize.css */
+@media screen and (min-width: 64em) {
+  /* media queries */
+}
+
+@font-face {
+  /* use fontawesome */
+}
