@@ -3,4 +3,7 @@ language: C
 services:
  - docker
 script:
- - echo "no tests!"
+ - mv builds/app.docker Dockerfile
+ - docker build -t app .
+ - mv builds/nginx.docker Dockerfile
+ - docker build -t nginx .

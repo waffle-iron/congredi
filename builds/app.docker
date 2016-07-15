@@ -5,7 +5,7 @@ WORKDIR /code
 RUN apt-get update -qq
 RUN apt-get install -qqy build-essential libssl-dev libffi-dev python-dev
 RUN bash -c "pip install flask redis pymongo nose2 PGPy pyjwt"
-ADD server.py /code/server.py
+ADD delegito.py /code/server.py
 ADD structs /code/structs
 # http://flask.pocoo.org/docs/0.11/testing/
 # add in unit testing of flask content

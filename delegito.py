@@ -4,7 +4,7 @@ from flask import Flask, jsonify, abort, json, Response,render_template, session
 from structs.keyvalues import *
 from structs.mongos import *
 from structs.emails import *
-from structs.delegito import Learner, Crypto
+#from structs.delegito import Learner, Crypto
 
 def userdata(request,e=True):
     j = request.get_json()
