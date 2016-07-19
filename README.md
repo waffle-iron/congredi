@@ -25,14 +25,22 @@ Crypto involves OpenPGP, Secure Secret Sharing, Shuffle-Sum, Tor, & WebRTC.
 * [ ] STV shuffle-sum
 
 ```
-/auth/session/ [GET|DELETE] - JWT
-/auth/db/ [POST|DELETE] - account
-/api/search/?offset=0?limit=0 {term:"",author:""} - search
-/api/storage/(user|district|election)/(new|<id>)/ [POST|GET|UPDATE|DELETE]
-
-/#/(auth|settings|create)/
-/#/user/(follow|<issues>)/
-/#/<district>/(admin|join|<election>/(register|vote|audit))/
+/api/
+    /auth/          [POST|DELETE] - db
+    /token/         [GET|DELETE] - JWT
+    /bearing/       [GET|DELETE] - JWT (longer time)
+    /search/:type
+        ?offset=0?limit=0 {term:"",author:""} - search
+    /storage/:type
+        /(new|:id)/ [POST|GET|UPDATE|DELETE]
+/#/
+    /auth/ -> login hover
+    /settings/ -> item number
+    /create/ -> district,election,point
+    /:user/ -> follow,message
+    /:district/ -> join
+        /admin
+        /:election/ -> register,vote,audio
 ```
 
 
