@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #from nose2.tools import with_setup, raises
-from server import app
-from structs.keyvalues import make_active, remove_active
-from delegito import Crypto, Learner
-
 from flask import json
+from structs.keyvalues import make_active, remove_active
+from structs.crypto import Crypto, Learner
+
+from delegito import app
 
 fl = app
 fl.config['TESTING'] = True

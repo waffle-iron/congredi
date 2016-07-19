@@ -22,7 +22,7 @@ var routesConfig		= require('./routes'),
 	createCtrl	= require('./controllers/create'),
 	//cryptoCtrl	= require('./controllers/crypto'),
 	editCtrl		= require('./controllers/edit'),
-	mainCtrl		= require('./controllers/main'),
+	//mainCtrl		= require('./controllers/main'),
 	mapCtrl		= require('./controllers/map'),
 	navCtrl		= require('./controllers/nav'),
 	pointsCtrl	= require('./controllers/points'),
@@ -44,7 +44,7 @@ angular.module('app',			['ngRoute'])
 	//.controller('crypto',		cryptoCtrl)
 	.controller('edit',			editCtrl)
 	.controller('map',			mapCtrl)
-	.controller('main',			mainCtrl)
+	//.controller('main',			mainCtrl)
 	.controller('nav',			['$scope', '$http', '$log', navCtrl])
 	.controller('points',		pointsCtrl)
 	.controller('search',		['$scope', searchCtrl])

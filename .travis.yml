@@ -7,3 +7,4 @@ script:
  - docker build -t app .
  - mv builds/nginx.docker Dockerfile
  - docker build -t nginx .
+ - nose2
