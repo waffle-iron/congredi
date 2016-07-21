@@ -2,6 +2,10 @@ sudo: required
 language: C
 services:
  - docker
+addons:
+  apt:
+    packages:
+    - python-nose2
 script:
  - mv builds/app.docker Dockerfile
  - docker build -t app .
