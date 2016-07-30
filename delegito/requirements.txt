@@ -1,0 +1,9 @@
+redis
+celery
+jwt
+pymongo
+flask
+PGPy
+stem
+nose2
+pyjwt

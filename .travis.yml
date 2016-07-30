@@ -7,8 +7,6 @@ addons:
     packages:
     - python-nose2
 script:
- - mv builds/app.docker Dockerfile
- - docker build -t app .
- - mv builds/nginx.docker Dockerfile
- - docker build -t nginx .
- - nose2
+ - docker build -t api delegito
+ - docker build -t proxy interface
+ - cd delegito && nose2

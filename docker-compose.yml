@@ -1,33 +1,52 @@
 version: '2'
+# tor bridge [:9050,:9001]
+#   -> nginx/letsencrypt proxy :443[:80]
+#       -> flask api[:5000]
+#           -> {redis cache/queue[:6379], celery worker, mongo[:27017]}
+
+#https://blog.codeship.com/nginx-reverse-proxy-docker-swarm-clusters/
 services:
-    app:
-        build:
-            context: .
-            dockerfile: builds/app.docker
-        links:
-         - mongo:mongo
-         - redis:redis
-        command: python /code/server.py
-    nginx:
-        build:
-            context: .
-            dockerfile: builds/nginx.docker
-        links:
-         - app:app
-        ports:
-         - 80:80
-        volumes:
-         - /etc/ssl/certs/delegito.crt:/etc/ssl/certs/delegito.crt
-         - /etc/ssl/private/delegito.key:/etc/ssl/certs/delegito.key
-    mongo:
+    database:
         image: mongo
         volumes:
          - /data/info:/data/db
-        # ports:
-        #  - "27017:27017"
-    redis:
+        ports:
+         - "27017:27017"
+    cache:
         image: redis
         volumes:
          - /data/redis:/data
         # ports:
         #  - "6379:6379"
+    worker: #background tasks
+        build: delegito
+        links:
+         - database:database
+         - cache:cache
+        command: python /code/worker.py
+    api: # scale this on nginx?
+        build: delegito
+        container_name: api
+        links:
+         - database:database
+         - cache:cache
+        command: python /code/api.py
+    #https://github.com/DennyDai/docker-letsencrypt
+    #https://github.com/mbrugger/letsencrypt-nginx-docker
+    proxy: # letsencrypt nginx
+        build: interface
+        links:
+         - api:api
+        ports:
+         - 443:443
+         - 80:80
+        volumes:
+         - /etc/letsencrypt:/etc/letsencrypt
+         - /var/lib/letsencrypt:/varlib/letsencrypt
+    tor: # obfusproxy bridge & relay & hidden service
+        image: chriswayg/tor-alpine
+        links: #9001, 9050
+         - api:api
+         - proxy:proxy
+        volumes:
+         - ./torrc:/etc/tor/torrc
