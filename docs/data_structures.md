@@ -1,4 +1,7 @@
-# Data structures
+# Mongo db
+
+This is a quick fix until using valid SQL linker tables.
+
 ```
 var user = {
     profile:{

@@ -1,6 +1,5 @@
 redis
 celery
-jwt
 pymongo
 flask
 PGPy

@@ -1,12 +1,23 @@
-# Processes
+# Docker-compose
 
-Within docker-compose.yml each process is separate, but a valid single Dockerfile
-could use supervisord to run individual daemons in the same container.
-
-
-The API/Worker subsections are run using the command operation in `docker-compose`:
+The API/Worker subsections run different commands:
 
 ```
         command: python /code/worker.py
         command: python /code/api.py
 ```
+
+# supervisord
+
+A valid supervisord config would daemonize each one:
+
+```
+[app]
+command=python /code/worker.py
+[worker]
+command=python /code/api.py
+
+```
+Which could be contained in a single dockerfile, but not
+scaled like docker-compose (irrelevant, as api cannot
+be scaled without a cluster).
