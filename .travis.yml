@@ -6,6 +6,9 @@ addons:
   apt:
     packages:
     - python-nose2
+    - python-pip
+before_test:
+ - pip install delegito/requirements.txt
 script:
  - docker build -t api delegito
  - docker build -t proxy interface
