@@ -16,4 +16,4 @@ and that your private ballot was counted as cast. To do so, view your voting rec
 under your profile, if it says "ready to audit" you may select to audit your vote.
 
 > Note: you cannot prove to anyone you voted a particular way, read more
-[here](//congredi.readthedocs.io/en/latest/Methods/zeroknowledge).
+[here](//congredi.readthedocs.io/en/latest/Methodology/zeroknowledge/).
