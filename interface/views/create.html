@@ -1,86 +1,58 @@
-publish documents or logic
-    all done, link to any similar documents or logic?
-        <!-- document -->
-
-
-<form name="document" ng-controller="creatorctrl" novalidate>
-    <div>{{ document is document.$valid }}</div>
-    <div ng-submit="document.$valid && creatorCtrl.submit()"></div>
-</form>
-
-        <div id="compose" ng-hide><!-- pull from partials/create--></div>
-        <div id="settings" ng-hide><!-- pull from partials/myself--></div>
-        <div ng-controller="PhoneListController">
-            <ul>
-                <li ng-repeat="phone in phones">
-                    <span>{{phone.name}}</span>
-                    <p>{{phone.snippet}}</p>
-                </li>
-            </ul>
-            <p>{{"hello" + " you"}}</p>
-            <section ng-controller="Panels as panel">
-                <ul class="nav nav-pills">
-                    <li ng-class="{ active:panel.isSelected(1) }">
-                        <a href ng-click="panel.selectTab(1)">Description</a>
-                    </li>
-                    <li ng-class="{ active:panel.isSelected(2) }">
-                        <a href ng-click="panel.selectTab(2)">Specifications</a>
-                    </li>
-                    <li ng-class="{ active:panel.isSelected(3) }">
-                        <a href ng-click="panel.selectTab(3)">Reviews</a></li>
-                </ul>
-                {{tab}}
-                <div class="panel" ng-show="panel.isSelected(1)">
-                    <h4>Description</h4>
-                    <p>{{product.description}}</p>
-                </div>
-                <div class="panel" ng-show="panel.isSelected(2)">
-                    <h4>Specifications</h4>
-                    <p>None</p>
-                </div>
-                <div class="panel" ng-show="panel.isSelected(3)">
-                    <form name="reviewForm" ng-controller="review as r" ng-submit="reviewCtrl.addReview(product)" novalidate>
-                        <h4>Reviews</h4>
-                        <h1>{{panel.email}}</h1>
-                        <blockquote>
-                            {{panel.text}}
-                        </blockquote>
-                        <input class="form-control" ng-model="panel.email" type="email">
-                        <textarea ng-model="panel.text">
-
-                        </textarea>
-                        <p>None</p>
-                        <div> reviewForm is {{reviewForm.$valid}}</div>
-                    </form>
-                </div>
-            </section>
-            <div ng-controller="internalServe as serve">
-                <ul class="list-group">
-                    <li class="list-group-item" ng-repeat="product in serve.products">
-                        <h1> {{product.name}} </h1>
-                        <h2 class="pull-right"> {{product.price | currency }} </h2>
-                        <p> {{product.description}} </p>
-                        <button ng-show="product.canPurchase"> Add to Cart </button>
-                    </li>
-                </ul>
+<form name="select" ng-controller="Panels as panel" novalidate>
+    <ul class="nav nav-pills">
+        <li ng-click="{ active:panel.select(1) }">Jurisdiction</li>
+        <li ng-click="{ active:panel.select(2) }">Election</li>
+        <li ng-click="{ active:panel.select(3) }">Issue</li>
+    </ul>
+        <div class="row">
+            <div class="large-6 medium-6 columns">
+                <label>Choose Your Favorite</label>
+                <input type="radio" name="pokemon" value="Red" id="pokemonRed">
+                <label for="pokemonRed">Radio 1</label>
+                <input type="radio" name="pokemon" value="Blue" id="pokemonBlue">
+                <label for="pokemonBlue">Radio 2</label>
             </div>
-    <div class="panel hero-cover">
-      <div class="panel-content">
-        <div class="registration">
-          <h2>Register</h2>
-          <form class="form" method='POST' action='/registration'>
-            <input class="form-input" type="hidden", name="_csrf", value='<%-csrfToken%>'>
-            <input class="form-input" type='text' name='name' placeholder='Name'>
-            <input class="form-input" type='text' name='username' placeholder='User Name'>
-            <input class="form-input" type='password' name='password' placeholder='Password'>
-            <input class="form-input" type='password' name='password_confirm' placeholder='Confirm Password'>
-            <input class="btn" type='submit' value='Submit'>
-            <a href='/sign_in'>Sign in</a>
-          </form>
-          </div>
+            <div class="large-6 medium-6 columns">
+                <label>Check these out</label>
+                <input id="checkbox1" type="checkbox">
+                <label for="checkbox1">Checkbox 1</label>
+                <input id="checkbox2" type="checkbox">
+                <label for="checkbox2">Checkbox 2</label>
+            </div>
         </div>
-      </div>
-    </div>
-<!--https://github.com/vpegado/angular-markdown-filter-->
 
-<div ng-submit="creatorctrl.submit()"></div>
+    <div>
+        <h1>{{ panel.current.title }}</h1>
+        <input ng-model="panel.proposed.title" placeholder="Your Title">
+        <textarea ng-model="panel.proposed.description" placeholder="A good description"></textarea>
+        <h2>{{ panel.current.listname }}</h2>
+        <ul>
+            <li ng-repeat="item in panel.current.list">
+                <span>{{ item }}</span> <!-- filter? | -->
+                <button type="checkbox" id="{ item }">
+            </li>
+        </ul>
+        <div ng-show="panel.proposed.canSubmit" ng-submit="select.$valid && panel.submit()">Create</div>
+    <div class="large-4 medium-4 columns">
+        <h5>Try one of these buttons:</h5>
+        <p><a href="#" class="small button">Simple Button</a>
+            <br/>
+            <a href="#" class="small radius button">Radius Button</a>
+            <br/>
+            <a href="#" class="small round button">Round Button</a>
+            <br/>
+            <a href="#" class="medium success button">Success Btn</a>
+            <br/>
+            <a href="#" class="medium alert button">Alert Btn</a>
+            <br/>
+            <a href="#" class="medium secondary button">Secondary Btn</a></p>
+        <div class="panel">
+            <h5>So many components, girl!</h5>
+            <p>A whole kitchen sink of goodies comes with Foundation. Check out the docs to see them all, along with details on making them your own.</p>
+            <a href="http://foundation.zurb.com/docs/" class="small button">Go to Foundation Docs</a>
+        </div>
+    </div>
+    </div>
+</form>
+<div id="compose" ng-hide><!-- pull from partials/create--></div>{{tab}}
+<!--https://github.com/vpegado/angular-markdown-filter-->

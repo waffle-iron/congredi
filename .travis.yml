@@ -12,4 +12,4 @@ before_test:
 script:
  - docker build -t api delegito
  - docker build -t proxy interface
- - cd delegito && nose2
+ - cd delegito && nose2 tests
