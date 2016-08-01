@@ -1,7 +1,27 @@
-# Python Libraries
-* [ ] db structure (linking, queries, objects)
-* [ ] openpgp plugin
-* [ ] STV shuffle-sum
+# Build items
+* [x] create setup.py
+* [ ] register on pypi
+
+# JS libraries
+* [x] get rid of annoying warning about repo (not a node.js package)
+* [ ] swap depreciated libraries on npm packages
+* [ ] determine how best to import openpgp.js
+
+# HTML templates
+* [ ] sort through the Foundation directives
+* [ ] begin hashing out templates as such
+
+# Python Basics
+* [ ] get openpgp where it needs to be
+* [ ] unify and document API routes
+* [ ] get startup process to correctly control Tor again
+* [ ] test queries to DB again
+
+# Python Crypto
+* [ ] implement shuffle-sum using paper
+* [ ] redo Secure Secret Sharing example to be applicable to jurisdiction
+* [ ] find docs on threshold signatures for jurisdictions (better option)
+
 
 # Flask interface
 * [ ] mail server

@@ -6,3 +6,4 @@ bower_components
 *.swp
 *.egg-info
 .sass-cache
+build

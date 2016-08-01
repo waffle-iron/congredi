@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from flask import json
-from database import make_active, remove_active
-from api import app
+from delegito import make_active, remove_active, app
+# from database import make_active, remove_active
+# from api import app
 fl = app
 fl.config['TESTING'] = True
 app = fl.test_client()
