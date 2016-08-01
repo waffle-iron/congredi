@@ -1,11 +1,25 @@
 # Congredi
 
-Congredi is an STV service, built into a PyPI package, Docker Image, & Mozilla extension.
+Congredi is a digital political engine for speciallized STV elections.
+This allows you to conduct experiments on forms of voting, issue debates,
+coalitions, & practical government improvements.
 
-It involves providing a secure interface for experiments on forms of government.
+It is made available in several formats:
 
-The library caters to providing a threshold-signature, single-transferable-vote system.
-The interface & accompanying infrastructure are for anonymity & censorship-proofing.
+* a staticly served Nginx Angular app (& docker image)
+* a Firefox extension
+* a JSON Web Token authorized Flask API, Celery Queue, & Mongo DB (& docker image)
+* a python library for Pip
+
+The crypto involves:
+
+* threshold-signature OpenPGP for jurisdiction appointments
+* threshold-encrypted Secure Secret Sharing for jurisdiction admin
+* Shuffle-Sum for private vote results
+* OpenPGP signatures for public polls
+* OpenPGP Key Signing & keyservers for authorizations
+* Tor & WebRTC for peer communications
+
 
 Around the web:
 

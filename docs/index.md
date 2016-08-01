@@ -1,18 +1,40 @@
-# Overview
-> Congredi - A Terrible, Digital Govermnent [delegito.io](//delegito.io)
+# WebLinks
 
-[![Build Status](https://travis-ci.org/Thetoxicarcade/congredi.svg?branch=master)](https://travis-ci.org/Thetoxicarcade/congredi)
-[![Documentation Status](https://readthedocs.org/projects/congredi/badge/?version=latest)](http://congredi.readthedocs.io/en/latest/?badge=latest)
+> A Terrible, Digital Govermnent - [delegito.io](//delegito.io)
 
-Congredi is a digital politics experiment, using cryptographic STV and
-social profiles to debate issues, form coalitions, and run "governments".
+[![Build Status](//travis-ci.org/Thetoxicarcade/congredi.svg?branch=master)](https://travis-ci.org/Thetoxicarcade/congredi)
+[![Documentation Status](//readthedocs.org/projects/congredi/badge/?version=latest)](http://congredi.readthedocs.io/en/latest/?badge=latest)
+[GitHub](//github.com/thetoxicarcade/congredi)
 
-It's an Nginx served Angular UI Pointcloud, & JWT Flask API to mongo DB.
+# About
 
-Crypto involves OpenPGP, Secure Secret Sharing, Shuffle-Sum, Tor, & WebRTC.
+Congredi is a digital political engine for speciallized STV elections.
+This allows you to conduct experiments on forms of voting, issue debates,
+coalitions, & practical government improvements.
 
-# Specializations
+It is made available in several formats:
 
-* Users / Sysadmins? [User Guide](UserGuide)
-* Developers / Contributors? [API](APIs) & [Build](building) docs
-* Cryptographers / Skeptics? [Methodology](methodology)
+* a staticly served Nginx Angular app (& docker image)
+* a Firefox extension
+* a JSON Web Token authorized Flask API, Celery Queue, & Mongo DB (& docker image)
+* a python library for Pip
+
+The crypto involves:
+
+* threshold-signature OpenPGP for jurisdiction appointments
+* threshold-encrypted Secure Secret Sharing for jurisdiction admin
+* Shuffle-Sum for private vote results
+* OpenPGP signatures for public polls
+* OpenPGP Key Signing & keyservers for authorizations
+* Tor & WebRTC for peer communications
+
+# Doc Specializations
+
+## Users / Sysadmins? [User Guide](UserGuide)
+Guides involved in getting up and running with Congredi instances.
+
+## Developers / Contributors? [API](APIs) & [Build](building) docs
+Guides for getting under the hood with the overlying architecture.
+
+## Cryptographers / Skeptics? [Methodology](methodology)
+Guides for working with the underlying libraries, objects, & functions.

@@ -8,6 +8,7 @@ formats:
 pages:
     - 'Home': 'index.md'
     - 'User Guide':
+        - 'Overview': 'UserGuide/index.md'
         - 'installing': 'UserGuide/installation.md'
         - 'System Administrators': 'UserGuide/sysadmin.md'
         - 'Your Profile': 'UserGuide/yourself.md'
@@ -16,12 +17,16 @@ pages:
     - 'Building':
         - 'overview': 'building/index.md'
         - 'style': 'building/style.md'
+        - 'documentation': 'building/docs.md'
         - 'testing': 'building/testing.md'
+        - 'builders': 'building/builds.md'
         - 'scaling': 'building/scaling.md'
     - 'APIs':
+        - 'overview':'APIS/index.md'
         - 'json': 'APIs/json.md'
         - 'crypto': 'APIs/cryptography.md'
         - 'DB': 'APIs/data_structures.md'
         - 'routes': 'APIs/routes.md'
     - 'Methodology':
+        - 'Overview': 'methodology/index.md'
         - 'Zero Knowledge': 'methodology/zeroKnowledge.md'
