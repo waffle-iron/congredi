@@ -25,3 +25,11 @@ class TestFlask(object):
 			print(aj)
 		except:
 			print('WIP: need to pass json into request.form?!?! http://flask.pocoo.org/docs/0.11/testing/')
+	def test_bearer(self):
+		print('Build Test')
+	def test_token(self):
+		print('Build Test')
+	def test_search(self):
+		print('Build Test')
+	def test_storage(self):
+		print('Build Test')

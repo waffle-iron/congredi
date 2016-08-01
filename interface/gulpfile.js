@@ -1,4 +1,12 @@
-'use strict'
+'use strict';
+/*
+bower openpgp
+graceful-fs (npm ls graceful-fs
+minimatch, to-iso-string, lodash, fsevents
+docker run -ti --rm -u $UID -v `pwd`:/srv/ marmelab/bower bash -c "npm install && bower --allow-root --config.interactive install"
+docker run -ti --rm -u $UID -v `pwd`:/srv/ marmelab/bower bash -c "npm install -g gulp && gulp"
+docker run -ti --rm -u $UID -v `pwd`:/srv/ marmelab/bower bash -c "npm install --save-dev browser-sync browserify conventional-github-releaser del gulp-clean-css pub fs gulp gulp-autoprefixer gulp-browserify gulp-bump gulp-coffee gulp-concat gulp-conventional-changelog gulp-cssimport gulp-eslint gulp-git gulp-jasmine gulp-jshint gulp-less gulp-mocha gulp-rename gulp-uglify gulp-util jshint jshint-stylish vinyl-buffer vinyl-source-stream yargs && npm install --save angular angular-bootstrap angular-cookies angular-mock angular-resource angular-route angular-ui-grid angular-ui-router openpgp"
+*/
 var args = require('yargs').argv,
 	// ARGS, NOOP
 	gulp = require('gulp'),
@@ -6,7 +14,6 @@ var args = require('yargs').argv,
 	// CLEAN
 	del = require('del'),
 	// JS
-	coffee = require('gulp-coffee'),
 	eslint = require('gulp-eslint'),
 	// TESTS
 	jasmine = require('gulp-jasmine'),
@@ -20,7 +27,7 @@ var args = require('yargs').argv,
 	// CSS
 	less = require('gulp-less'),
 	cssimport = require('gulp-cssimport'),
-	minifyCss = require('gulp-minify-css'),
+	cleanCss = require('gulp-clean-css'),
 	//RELEASE
 	bump = require('gulp-bump'),
 	fs = require('fs'),
@@ -114,7 +121,7 @@ gulp.task('js', ['clean'], function() {
 });
 // TESTS
 gulp.task('tests', function() {
-	gulp.src(['js/*.test.js'])
+	gulp.src(['js/tests/*.js'])
 		.pipe(jasmine());
 });
 // MODULES
@@ -142,17 +149,9 @@ gulp.task('css', ['clean'], function() {
 	gulp.src(['./css/*.css', '!dist/*']) //.less
 		.pipe(less())
 		.pipe(cssimport())
-		.pipe(args.production ? minifyCss() : gutil.noop())
+		.pipe(args.production ? cleanCss() : gutil.noop())
 		.pipe(concat('app.min.css'))
 		.pipe(gulp.dest('./dist/css/'));
-});
-// PAGE
-gulp.task('page', ['clean'], function() {
-	console.log('Rendering templates....');
-	// gulp.src('./views/*.jade')
-	// 	.pipe(jade())//liquid
-	// 	.pipe(minify())
-	// 	.pipe(gulp.dest('views'));
 });
 // TMP
 gulp.task('tmp', ['browser'], function() {
@@ -181,7 +180,6 @@ gulp.task('watch', function() {
 	});
 	var files = [
 		'views/*.html',
-		'views/*.jade',
 		'css/*.css',
 		'js*.js'
 	];
@@ -261,169 +259,5 @@ gulp.task('release', function(callback) {
 });
 
 //run order
-gulp.task('default', ['clean', 'js', 'tests', 'browser', 'ugly', 'css', 'page', 'tmp']);
+gulp.task('default', ['clean', 'js', 'tests', 'browser', 'ugly', 'css', 'tmp']);
 //watcher
-/*
-
-
-$ gem update --system
-$ gem install compass
-
-Please refer the user guide
-Installation
-
-Install with npm
-
-$ npm install gulp-compass --save-dev
-
-Usage
-Load config from config.rb
-
-Please make sure to add css and sass options with the same value in config.rb since compass can't output css result directly.
-
-    css default value is css.
-    sass default value is sass.
-
-var compass = require('gulp-compass');
- 
-gulp.task('compass', function() {
-  gulp.src('./src/*.scss')
-    .pipe(compass({
-      config_file: './config.rb',
-      css: 'stylesheets',
-      sass: 'sass'
-    }))
-    .pipe(gulp.dest('app/assets/temp'));
-});
-
-Load config without config.rb
-
-set your project path.
-
-var compass = require('gulp-compass'),
-  path = require('path');
- 
-gulp.task('compass', function() {
-  gulp.src('./src/*.scss')
-    .pipe(compass({
-      project: path.join(__dirname, 'assets'),
-      css: 'css',
-      sass: 'sass'
-    }))
-    .pipe(gulp.dest('app/assets/temp'));
-});
-
-set your compass settings.
-
-var compass = require('gulp-compass'),
-  minifyCSS = require('gulp-minify-css');
- 
-gulp.task('compass', function() {
-  gulp.src('./src/*.scss')
-    .pipe(compass({
-      css: 'app/assets/css',
-      sass: 'app/assets/sass',
-      image: 'app/assets/images'
-    }))
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('app/assets/temp'));
-});
-
-Support multiple require option
-
-var compass = require('gulp-compass'),
-  minifyCSS = require('gulp-minify-css');
- 
-gulp.task('compass', function() {
-  gulp.src('./src/*.scss')
-    .pipe(compass({
-      css: 'app/assets/css',
-      sass: 'app/assets/sass',
-      image: 'app/assets/images',
-      require: ['susy', 'modular-scale']
-    }))
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('app/assets/temp'));
-});
-
-Support return the output of the Compass as the callback
-
-var compass = require('gulp-compass'),
-  minifyCSS = require('gulp-minify-css');
- 
-gulp.task('compass', function() {
-  gulp.src('./src/*.scss')
-    .pipe(compass({
-      css: 'app/assets/css',
-      sass: 'app/assets/sass',
-      image: 'app/assets/images'
-    }))
-    .on('error', function(error) {
-      // Would like to catch the error here 
-      console.log(error);
-      this.emit('end');
-    })
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('app/assets/temp'));
-});
-
-gulp-compass with gulp-plumber
-
-var compass = require('gulp-compass'),
-  plumber = require('gulp-plumber'),
-  minifyCSS = require('gulp-minify-css');
- 
-gulp.task('compass', function() {
-  gulp.src('./src/*.scss')
-    .pipe(plumber({
-      errorHandler: function (error) {
-        console.log(error.message);
-        this.emit('end');
-    }}))
-    .pipe(compass({
-      css: 'app/assets/css',
-      sass: 'app/assets/sass',
-      image: 'app/assets/images'
-    }))
-    .on('error', function(err) {
-      // Would like to catch the error here 
-    })
-    .pipe(minifyCSS())
-    .pipe(gulp.dest('app/assets/temp'));
-});
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var minifyCSS = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var del = require('del');
-
-gulp.task('clean', function(){
-    del(['../typo3/fileadmin/assets/css/2014-12-30-ag-style.min.css'],{'force':true})
-})
-
-gulp.task('sass', function () {
-    gulp.src('./scss/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('./css'));
-    gulp.src('./scss/*.scss')
-        .pipe(sass())
-        .pipe(gulp.dest('../typo3/fileadmin/assets/css/'));
-});
-
-gulp.task('minify-css', function() {
-  gulp.src('./css/*.css')
-    .pipe(minifyCSS({keepBreaks:true}))
-    .pipe(rename("2014-12-30-ag-style.min.css"))
-    .pipe(gulp.dest('../typo3/fileadmin/assets/css/'));
-});
-
-// Watch Files For Changes
-gulp.task('watch', function() {
-    gulp.watch('./scss/*.scss', ['clean','sass']);
-    gulp.watch('./css/*.css', ['minify-css']);
-});
-
-// Default Task
-gulp.task('default', ['clean','sass','minify-css','watch']);
-
-*/

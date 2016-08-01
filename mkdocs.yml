@@ -1,0 +1,20 @@
+site_name: Congredi / Delegito / Komento
+docs_dir: docs
+theme: readthedocs
+site_favicon: favicon.ico
+extra_templates: []
+formats:
+    - none
+pages:
+    - 'Home': 'index.md'
+    #- User Guide:
+    - 'Building':
+        - 'overview': 'building/index.md'
+        - 'style': 'building/style.md'
+        - 'testing': 'building/testing.md'
+        - 'scaling': 'building/scaling.md'
+    - 'APIs':
+        - 'json': 'APIs/json.md'
+        - 'crypto': 'APIs/cryptography.md'
+        - 'DB': 'APIs/data_structures.md'
+        - 'routes': 'APIs/routes.md'

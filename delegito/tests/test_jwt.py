@@ -7,6 +7,8 @@ class TestTokens(object):
 		token = make_active('test','ab')
 		token = make_active('bets','cb',True)
 		remove_active(token)
+	def test_invalid(self):
+		print('Build Test')
 	@classmethod #from nose2.tools import with_setup, raises
 	def setup_class(self):
 		print('setup')

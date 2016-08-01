@@ -10,11 +10,17 @@
         /(new|:id)/ [POST|GET|UPDATE|DELETE]
 ```
 # Auth
-Register, Log in, Delete account
 * URL: `/api/auth/`
-* Format: **POST**/**DELETE**
-* Data:
-* Results:
+
+## Registering
+* Format: **POST**
+* Data: `{ username:'username',password:'hashed',email:'email'}`
+* Results: `{Authoriation: aldkfj}`
+
+## Canceling
+* Format: **DELETE**
+* Data: ``
+* Results: `{goodbye:'for now'}`
 
 # Token
 Heartbeat tokens for faster endpoints

@@ -9,6 +9,7 @@ addons:
     - python-pip
 before_script:
  - sudo pip install -r delegito/requirements.txt
+ - sudo pip install setuptools-lint mkdocs
 script:
  - docker build -t api delegito
  - docker build -t proxy interface
@@ -16,3 +17,4 @@ script:
  - python setup.py test
  - sudo python setup.py install
  - python setup.py lint || echo "Lint failing..."
+ - mkdocs build || echo "Docs failing..."
