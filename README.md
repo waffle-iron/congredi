@@ -20,25 +20,4 @@ Around the web:
 * [Onion](//aldskfj.onion) - ***Not currently/usually running***
 
 
-## Starting Up
-
-With compose:
-```
-docker-compose build
-docker-compose up -d && docker-compose scale worker=3
-```
-
-With containers:
-```
-docker pull ericoflondon/congredi-interface
-docker pull ericoflondon/congredi-api
-```
-
-For the library: `pip install delegito`
-
-
-## Helping out
-
-* document scaling api clusters?
-* css styling within interface?
-* the [todo](docs/todo) section
+> Helping out? Check out the github [issues](//github.com/thetoxicarcade/congredi/issues)

@@ -1,11 +1,26 @@
-# Docker-compose
+# Starting Up
 
+
+## With Docker-compose
+```
+docker-compose build
+docker-compose up -d && docker-compose scale worker=3
+```
 The API/Worker subsections run different commands:
 
 ```
         command: python /code/worker.py
         command: python /code/api.py
 ```
+
+## With containers:
+```
+docker pull ericoflondon/congredi-interface
+docker pull ericoflondon/congredi-api
+```
+
+
+
 
 # supervisord
 

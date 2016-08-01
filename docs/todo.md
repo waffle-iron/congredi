@@ -40,3 +40,10 @@
 * [ ] angular /#/ hacks, modals
 * [ ] point clouds
 * [ ] STV shuffle-sum
+
+
+## Helping out
+
+* document scaling api clusters?
+* css styling within interface?
+* the [todo](docs/todo) section

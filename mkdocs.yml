@@ -7,7 +7,12 @@ formats:
     - none
 pages:
     - 'Home': 'index.md'
-    #- User Guide:
+    - 'User Guide':
+        - 'installing': 'UserGuide/installation.md'
+        - 'System Administrators': 'UserGuide/sysadmin.md'
+        - 'Your Profile': 'UserGuide/yourself.md'
+        - 'Jurisdictions': 'UserGuide/groups.md'
+        - 'Voting': 'UserGuide/votes.md'
     - 'Building':
         - 'overview': 'building/index.md'
         - 'style': 'building/style.md'
@@ -18,3 +23,5 @@ pages:
         - 'crypto': 'APIs/cryptography.md'
         - 'DB': 'APIs/data_structures.md'
         - 'routes': 'APIs/routes.md'
+    - 'Methodology':
+        - 'Zero Knowledge': 'methodology/zeroKnowledge.md'
