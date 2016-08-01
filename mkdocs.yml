@@ -1,6 +1,6 @@
 site_name: Congredi / Delegito / Komento
 docs_dir: docs
-theme: readthedocs
+theme: journal
 site_favicon: favicon.ico
 extra_templates: []
 formats:
@@ -22,7 +22,7 @@ pages:
         - 'builders': 'building/builds.md'
         - 'scaling': 'building/scaling.md'
     - 'APIs':
-        - 'overview':'APIS/index.md'
+        - 'overview': 'APIs/index.md'
         - 'json': 'APIs/json.md'
         - 'crypto': 'APIs/cryptography.md'
         - 'DB': 'APIs/data_structures.md'
