@@ -35,7 +35,10 @@ setup(name='delegito',
         ],
     include_package_data=True,
     test_suite='nose2.collector.collector',
-    tests_require=['nose2'],
+    tests_require=[
+        'nose2',
+        'setuptools-lint',
+        'pylint'],
     zip_safe=False
     )
 #python setup.py register sdist upload

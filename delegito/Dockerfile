@@ -5,8 +5,8 @@ RUN apt-get install -qqy build-essential libssl-dev libffi-dev python-dev 1>/dev
 RUN bash -c "pip install flask redis pymongo nose2 PGPy pyjwt celery stem" 1>/dev/null
 ADD . /code/delegito
 WORKDIR /code
-RUN mv delegito/setup.py setup.py
-RUN python setup.py build && python setup.py test && python setup.py install
+RUN mv delegito/setup.py setup.py && pip install setuptools-lint && mv delegito/.pylintrc .pylintrc
+RUN python setup.py build && python setup.py test && python setup.py install && python setup.py lint || echo "Lint failing..."
 #ENV DEBIAN_FRONTEND noninteractive
 #RUN apt-get update && apt-get install -y apt-transport-https && apt-get upgrade -y --install-recommends
 #RUN sudo apt-get install -y --install-recomends python-pip python-dev
