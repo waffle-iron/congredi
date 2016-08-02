@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Thetoxicarcade/congredi.png?label=ready&title=Ready)](https://waffle.io/Thetoxicarcade/congredi)
 # Congredi
 
 Congredi is a digital political engine for speciallized STV elections.
