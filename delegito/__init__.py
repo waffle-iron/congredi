@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from service.database import mongo_start, mongo_token, mongo_stop, open_journal, search_journal, append_journal, notes, mongols
-from service.mail import mail
+from service import mail
 from service.tokens import check_active, make_active, remove_active
 
 from security.pubkey import ppq, Crypto

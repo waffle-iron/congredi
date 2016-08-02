@@ -2,8 +2,11 @@
 # -*- coding: utf-8 -*-
 from flask import Flask, jsonify, abort, json, Response,render_template, session, request, redirect, url_for, escape
 import logging, traceback
-from delegito.service.tokens import check_active, make_active, remove_active
-from delegito.service.mail import mail, templates
+from service.tokens import check_active, make_active, remove_active
+from service.mail import mail, templates
+from security.pubkey import ppq, Crypto
+from security.rendesvous import start_tor, stop_tor, start_controller, swap_controller, stop_controller, write_conf, offer_rendesvous
+from security.sss import generate_shares, share_secret, reconstruct_secret
 
 """
 /api/
@@ -197,6 +200,7 @@ if __name__ == '__main__':
 	logger = logging.getLogger(__name__)
 	logging.info('Welcome to Komento')
 	try:
+		torp = start_tor()
 		controller = start_controller()
 		offered_rendesvous = offer_rendesvous(controller)
 		logging.info("Access rendesvous on: http://%s.onion" % offered_rendesvous)
@@ -208,7 +212,7 @@ if __name__ == '__main__':
 		try:
 			controller.from_port().remove_ephemeral_hidden_service(offered_rendesvous)
 			controller.close()
-			stop_tor()
+			stop_tor(torp)
 			logging.debug("rendesvous deleted successfully")
 		except:
 			pass

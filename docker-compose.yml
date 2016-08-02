@@ -23,14 +23,14 @@ services:
         links:
          - database:database
          - cache:cache
-        command: python /code/worker.py
+        command: python /code/delegito/worker.py
     api: # scale this on nginx?
         build: delegito
         container_name: api
         links:
          - database:database
          - cache:cache
-        command: python /code/api.py
+        command: python /code/delegito/api.py
     #https://github.com/DennyDai/docker-letsencrypt
     #https://github.com/mbrugger/letsencrypt-nginx-docker
     proxy: # letsencrypt nginx
@@ -43,10 +43,3 @@ services:
         volumes:
          - /etc/letsencrypt:/etc/letsencrypt
          - /var/lib/letsencrypt:/varlib/letsencrypt
-    tor: # obfusproxy bridge & relay & hidden service
-        image: chriswayg/tor-alpine
-        links: #9001, 9050
-         - api:api
-         - proxy:proxy
-        volumes:
-         - ./torrc:/etc/tor/torrc

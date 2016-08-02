@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 import jwt, datetime
 def check_active(request, secret): # no redis smarts at all
 	if not request.headers.get('Authorization'):

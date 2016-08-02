@@ -1,8 +1,8 @@
 Nickname delegito
 #ContactInfo email@example.com
 #Address 10.10.10.10
-SocksPort 0
-ORPort 9001
+SocksPort 9050
+#ORPort 9001
 ExitPolicy reject *:* # no exits allowed
 User tord
 DataDirectory /home/tord/.tor

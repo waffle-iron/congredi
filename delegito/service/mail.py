@@ -4,8 +4,7 @@ import smtplib, os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formatdate
-from delegito.config import password
-def mail(address, subject, plain, html):
+def mail(address, subject, plain, html, password):
 	print('Sending an Email.')
 	return
 	msg = MIMEMultipart('alternative')

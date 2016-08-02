@@ -23,6 +23,7 @@ pages:
         - 'scaling': 'building/scaling.md'
     - 'APIs':
         - 'overview': 'APIs/index.md'
+        - 'networking': 'APIs/networking.md'
         - 'json': 'APIs/json.md'
         - 'crypto': 'APIs/cryptography.md'
         - 'DB': 'APIs/data_structures.md'

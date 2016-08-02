@@ -4,5 +4,4 @@ pymongo
 flask
 PGPy
 stem
-nose2
 pyjwt

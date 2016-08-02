@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # WARNING - sync congredi/setup.py and congredi/delegito/setup.py
 from setuptools import setup
 def readme():

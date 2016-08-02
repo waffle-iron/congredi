@@ -1,31 +1,41 @@
 # -*- coding: utf-8 -*-
 #https://cryptography.io/en/latest/fernet/
-import os, sys, struct, itertools, datetime
+import os, sys, datetime, logging, time
 from stem.control import Controller
+from stem.util import term
+from stem import process
 #http://stackoverflow.com/questions/35437668/realtime-progress-tracking-of-celery-tasks/35438284#35438284
 # https://gist.github.com/tmshv/9c0712b858ab1bbed976
-TOR_CONTROLLER_PASS='password'
+TOR_CONTROLLER_PASS='my_password'
 SOCKS_PORT = 9050
 offered_keypath = os.path.expanduser('~/.komento/offered_rendesvous')
+def print_bootstrap_lines(line):
+	if "Bootstrapped " in line: print(term.format(line, term.Color.BLUE))
 def start_tor():
-	tor_process = stem.process.launch_tor_with_config(
+	tor_process = process.launch_tor_with_config(
 	config = {
 	'SocksPort': str(SOCKS_PORT),
+	'ControlPort': str(9051),
 	'ExitNodes': '{ru}',
 	},
 	init_msg_handler = print_bootstrap_lines,
 	)
 	return tor_process
-def stop_tor():
+def stop_tor(tor_process):
 	tor_process.kill()  # stops tor
 def start_controller():
 	logging.debug("Connect controller")
-	controller = Controller.from_port(port=9051)
-	if not controller:
-		logging.critical("Could not connect to Tor controller")
-		sys.exit(1)
-	controller.authenticate()
-	return controller
+	timeout = 0
+	while timeout < 60:
+		try:
+			controller = Controller.from_port(port=9051)
+			controller.authenticate()
+			return controller
+		except:
+			time.sleep(1)
+			timeout += 1
+	logging.critical("Could not connect to Tor controller")
+	sys.exit(1)
 def swap_controller(controller):
 	controller.signal(Signal.NEWNYM)
 	time.sleep(controller.get_newnym_wait())
